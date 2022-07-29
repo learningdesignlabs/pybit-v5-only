@@ -717,21 +717,21 @@ class WebSocket(_FuturesWebSocketManager):
         https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook25
         """
         topic = "orderBookL2_25.{}"
-        self.subscribe(topic, callback, symbol)
+        return self.subscribe(topic, callback, symbol)
 
     def orderbook_200_stream(self, callback, symbol):
         """
         https://bybit-exchange.github.io/docs/inverse/#t-websocketorderbook200
         """
         topic = "orderBook_200.100ms.{}"
-        self.subscribe(topic, callback, symbol)
+        return self.subscribe(topic, callback, symbol)
 
     def trade_stream(self, callback, symbol):
         """
         https://bybit-exchange.github.io/docs/inverse/#t-websockettrade
         """
         topic = "trade.{}"
-        self.subscribe(topic, callback, symbol)
+        return self.subscribe(topic, callback, symbol)
 
     def insurance_stream(self, callback, symbol):
         """
@@ -739,7 +739,7 @@ class WebSocket(_FuturesWebSocketManager):
         https://bybit-exchange.github.io/docs/inverse/#t-websocketinsurance
         """
         topic = "insurance.{}"
-        self.subscribe(topic, callback, symbol)
+        return self.subscribe(topic, callback, symbol)
 
     def kline_stream(self, callback, symbol, interval):
         """
@@ -747,21 +747,21 @@ class WebSocket(_FuturesWebSocketManager):
         """
         topic = "klineV2.{}.{}"
         topic = topic.format(str(interval), "{}")
-        self.subscribe(topic, callback, symbol)
+        return self.subscribe(topic, callback, symbol)
 
     def instrument_info_stream(self, callback, symbol):
         """
         https://bybit-exchange.github.io/docs/inverse/#t-websocketinstrumentinfo
         """
         topic = "instrument_info.100ms.{}"
-        self.subscribe(topic, callback, symbol)
+        return self.subscribe(topic, callback, symbol)
 
     def liquidation_stream(self, callback, symbol):
         """
         https://bybit-exchange.github.io/docs/inverse/#t-websocketliquidation
         """
         topic = "liquidation.{}"
-        self.subscribe(topic, callback, symbol)
+        return self.subscribe(topic, callback, symbol)
 
     # Private topics
     def position_stream(self, callback):
@@ -769,32 +769,32 @@ class WebSocket(_FuturesWebSocketManager):
         https://bybit-exchange.github.io/docs/inverse/#t-websocketposition
         """
         topic = "position"
-        self.subscribe(topic, callback)
+        return self.subscribe(topic, callback)
 
     def execution_stream(self, callback):
         """
         https://bybit-exchange.github.io/docs/inverse/#t-websocketexecution
         """
         topic = "execution"
-        self.subscribe(topic, callback)
+        return self.subscribe(topic, callback)
 
     def order_stream(self, callback):
         """
         https://bybit-exchange.github.io/docs/inverse/#t-websocketorder
         """
         topic = "order"
-        self.subscribe(topic, callback)
+        return self.subscribe(topic, callback)
 
     def stop_order_stream(self, callback):
         """
         https://bybit-exchange.github.io/docs/inverse/#t-websocketstoporder
         """
         topic = "stop_order"
-        self.subscribe(topic, callback)
+        return self.subscribe(topic, callback)
 
     def wallet_stream(self, callback):
         """
         https://bybit-exchange.github.io/docs/inverse/#t-websocketwallet
         """
         topic = "wallet"
-        self.subscribe(topic, callback)
+        return self.subscribe(topic, callback)

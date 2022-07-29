@@ -292,6 +292,10 @@ class _FuturesWebSocketManager(_WebSocketManager):
         self.ws.send(subscription_message)
         self.subscriptions.append(subscription_message)
         self._set_callback(topic, callback)
+        return subscription_args
+
+    def unsubscribe(self, topics):
+        self.ws.send(json.dumps({"op": "unsubscribe", "args": topics}))
 
     def _initialise_local_data(self, topic):
         # Create self.data
@@ -369,6 +373,23 @@ class _FuturesWebSocketManager(_WebSocketManager):
                          f"Error: {response}.")
             self._pop_callback(sub[0])
 
+    def _process_unsubscription_message(self, message):
+        try:
+            unsub = message["request"]["args"]
+        except KeyError:
+            unsub = message["data"]["successTopics"]  # USDC private sub format
+
+        # If we get successful futures unsubscription, notify user
+        if message.get("success") is True:
+            logger.debug(f"Unsubscription to {unsub} successful.")
+            self._pop_callback(unsub[0])  # todo unsub from several items
+
+        # Futures subscription fail
+        elif message.get("success") is False:
+            response = message["ret_msg"]
+            logger.error("Couldn't unsubscribe to topic."
+                         f"Error: {response}.")
+
     def _process_normal_message(self, message):
         topic = message["topic"]
         if "orderBook" in topic:
@@ -399,10 +420,18 @@ class _FuturesWebSocketManager(_WebSocketManager):
             else:
                 return False
 
+        def is_unsubscription_message():
+            if message.get("request", {}).get("op") == "unsubscribe":
+                return True
+            else:
+                return False
+
         if is_auth_message():
             self._process_auth_message(message)
         elif is_subscription_message():
             self._process_subscription_message(message)
+        elif is_unsubscription_message():
+            self._process_unsubscription_message(message)
         else:
             self._process_normal_message(message)
 
