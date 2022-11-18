@@ -330,7 +330,7 @@ class _HTTPManager:
                         time=dt.utcnow().strftime("%H:%M:%S")
                     )
 
-            if "usdc" in path:
+            if any(x in path for x in ["usdc", "copytrading"]):
                 ret_code = "retCode"
                 ret_msg = "retMsg"
             else:
