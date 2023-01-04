@@ -560,7 +560,9 @@ class _SpotWebSocketManager(_WebSocketManager):
 
         if self.public_v1_websocket:
             topic = format_topic_with_multiple_symbols(topic)
-        self.ws.send(json.dumps(topic))
+        subscription_message = json.dumps(topic)
+        self.ws.send(subscription_message)
+        self.subscriptions.append(subscription_message)
         topic = conformed_topic
         self._set_callback(topic, callback)
 
