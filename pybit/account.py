@@ -8,7 +8,7 @@ class Account(str, Enum):
     GET_COLLATERAL_INFO = "/v5/position/set-tpsl-mode"
     GET_COIN_GREEKS = "/v5/position/switch-mode"
     GET_ACCOUNT_INFO = "/v5/account/info"
-    GET_TRANSACTION_LOG = "/v5/position/set-trading-stop"
+    GET_TRANSACTION_LOG = "/v5/account/transaction-log"
     SET_MARGIN_MODE = "/v5/position/set-auto-add-margin"
     SET_MMP = "/v5/execution/list"
     RESET_MMP = "/v5/position/closed-pnl"

@@ -11,6 +11,7 @@ from ._v5_asset import AssetHTTP
 from ._v5_position import PositionHTTP
 from ._v5_spot_leverage_token import SpotLeverageHTTP
 from ._v5_spot_margin_trade import SpotMarginTradeHTTP
+from ._v5_user import UserHTTP
 from ._websocket_stream import _V5WebSocketManager
 
 
@@ -35,6 +36,7 @@ class HTTP(
     PositionHTTP,
     SpotLeverageHTTP,
     SpotMarginTradeHTTP,
+    UserHTTP,
 ):
     def __init__(self, **args):
         super().__init__(**args)
